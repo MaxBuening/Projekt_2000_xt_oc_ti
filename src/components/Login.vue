@@ -1,53 +1,53 @@
 <template>
   <main class="form-signin w-100 m-auto">
-    <form @submit.prevent="submit">
+    <form @submit.prevent="anfrage">
       <h1 class="h3 mb-3 fw-normal">Bitte Einloggen</h1>
 
       <div class="form-floating">
-        <input v-model="data.benutzername" type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <input v-model="anfrage.benutzername" type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
         <label for="floatingInput">Benutzername</label>
       </div>
       <div class="form-floating">
-        <input v-model="data.passwort" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <input v-model="anfrage.passwort" type="password" class="form-control" id="floatingPassword" placeholder="Password">
         <label for="floatingPassword">Password</label>
       </div>
-
       <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
     </form>
   </main>
 </template>
 
 <script>
-import {reactive} from "vue";
+
+
+
+
 import axios from "axios";
-import {useRouter} from "vue-router/dist/vue-router";
 
 export default {
   name: "Log-in",
-setup() {
-
-  const data = reactive(
-      {
+  methods: {
+    anfrage(){
+      axios.post('http://localhost:8080/api/login', {
         benutzername: '',
         passwort: ''
-      }
-  );
-  const router = useRouter();
-  const submit = async () => {
-    const response = await axios.post('http://localhost:8080/api/login', data, {withCredentials: true});
-    axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
-    await router.push('/')
+      })
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    }
+
+
   }
-  return {
-    data,
-    submit
-  }
+
+
 }
-}
+
 </script>
 
 <style>
-
 
 .form-signin {
   max-width: 330px;
