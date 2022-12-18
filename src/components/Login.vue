@@ -22,6 +22,8 @@
 
 
 import axios from "axios";
+import router from "@/router";
+
 
 export default {
   name: "Log-in",
@@ -31,8 +33,10 @@ export default {
         benutzername: '',
         passwort: ''
       })
-          .then(function (response) {
-            console.log(response);
+          .then(async function (response) {
+            console.log(response)
+            axios.defaults.headers.common['Authorization'] = `Bearer ${response.data}`
+            await router.push('/user')
           })
           .catch(function (error) {
             console.log(error);
