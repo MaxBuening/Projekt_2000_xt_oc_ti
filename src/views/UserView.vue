@@ -16,6 +16,7 @@ export default {
 
     onMounted(async () => {
       const {data} = await axios.get('http://localhost:8080/api/user')
+      console.log(data)
       message.value = `Hi ${data.vorname} ${data.nachname}`;
     })
 

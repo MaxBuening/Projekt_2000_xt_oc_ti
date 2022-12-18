@@ -25,13 +25,18 @@ import axios from "axios";
 import router from "@/router";
 
 
+
 export default {
   name: "Log-in",
   methods: {
+
     anfrage(){
-      axios.post('http://localhost:8080/api/login', {
-        benutzername: '',
-        passwort: ''
+
+      console.log(this.anfrage.benutzername, this.anfrage.passwort)
+      axios.post('http://localhost:8080/api/login',{
+        benutzername: this.anfrage.benutzername,
+        passwort: this.anfrage.passwort
+
       })
           .then(async function (response) {
             console.log(response)
@@ -42,8 +47,6 @@ export default {
             console.log(error);
           });
     }
-
-
   }
 
 
