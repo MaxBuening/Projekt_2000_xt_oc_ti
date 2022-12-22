@@ -6,19 +6,53 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
+
+        <div class="navbar-nav" v-if="auth">
+          <router-link class="nav-link" to="/" >Home</router-link>
+          <router-link class="nav-link" to="/user">Profil</router-link>
+          <router-link class="nav-link" to="/" @click="logout" >Logout</router-link>
+        </div>
+
+        <div class="navbar-nav" v-if="!auth">
           <router-link class="nav-link" to="/" >Home</router-link>
           <router-link class="nav-link" to="/login">Einloggen</router-link>
           <router-link class="nav-link" to="/register">Registrieren</router-link>
         </div>
+
       </div>
     </div>
   </nav>
 </template>
 
 <script>
+import {onMounted, ref} from "vue";
+import axios from "axios";
+
 export default {
-  name: "Nav-bar"
+  name: "Nav-bar",
+
+  setup() {
+    const auth = ref(false);
+
+    onMounted(async () => {
+      try{
+        await axios.get('http://localhost:8080/api/user');
+        auth.value = true
+      } catch (e) {
+        auth.value =false;
+      }
+    });
+
+    const logout = async () => {
+      axios.post('http://localhost:8080/api/user', {}, {withCredentials: true})
+    }
+    return {
+      auth,
+      logout
+    }
+
+  }
+
 }
 </script>
 

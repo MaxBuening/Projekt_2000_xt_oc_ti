@@ -20,9 +20,8 @@
 
 
 
-
-import axios from "axios";
 import router from "@/router";
+import axios from "axios";
 
 
 
@@ -33,13 +32,14 @@ export default {
     anfrage(){
 
       console.log(this.anfrage.benutzername, this.anfrage.passwort)
-      axios.post('http://localhost:8080/api/login',{
+      axios.post('http://localhost:8080/api/login', {
         benutzername: this.anfrage.benutzername,
         passwort: this.anfrage.passwort
 
-      })
+      },{withCredentials: true})
           .then(async function (response) {
-            console.log(response)
+            //console.log(response)
+            console.log(response.request.responseText)
             axios.defaults.headers.common['Authorization'] = `Bearer ${response.data}`
             await router.push('/user')
           })

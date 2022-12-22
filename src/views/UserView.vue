@@ -11,6 +11,8 @@ import axios from "axios";
 
 export default {
   name: "UserView",
+  components: {},
+
   setup(){
     const message = ref('You are not Logged in');
 
