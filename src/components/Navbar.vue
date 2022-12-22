@@ -28,6 +28,7 @@
 import {onMounted, ref} from "vue";
 import axios from "axios";
 
+
 export default {
   name: "Nav-bar",
 
@@ -44,7 +45,17 @@ export default {
     });
 
     const logout = async () => {
-      axios.post('http://localhost:8080/api/user', {}, {withCredentials: true})
+
+      await axios.post('http://localhost:8080/api/logout', {}, {withCredentials: true})
+          .then(async function (response) {
+        console.log("Hallo")
+        axios.defaults.headers.common['Authorization'] = `Bearer ${response.data}`
+            auth.value= false;
+      })
+          .catch(function (error) {
+            console.log(error);
+          });
+
     }
     return {
       auth,
