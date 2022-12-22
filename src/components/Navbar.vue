@@ -38,7 +38,7 @@ export default {
     onMounted(async () => {
       try{
         await axios.get('http://localhost:8080/api/user');
-        auth.value = true
+        auth.value = true;
       } catch (e) {
         auth.value =false;
       }
@@ -48,9 +48,9 @@ export default {
 
       await axios.post('http://localhost:8080/api/logout', {}, {withCredentials: true})
           .then(async function (response) {
-        console.log("Hallo")
         axios.defaults.headers.common['Authorization'] = `Bearer ${response.data}`
             auth.value= false;
+        this.forceUpdate();
       })
           .catch(function (error) {
             console.log(error);
