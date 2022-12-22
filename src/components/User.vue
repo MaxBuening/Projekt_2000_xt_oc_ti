@@ -2,15 +2,18 @@
   <header>
   </header>
   <body>
+    <div class="wrap">
     <div class="container-fluid min-vh-100">
       <div class="row">
-        <div class="col-2">Logo</div>
-        <div class="col-7">(leer)</div>
+        <div class="col-3">
+          <img alt="Logo" src="../assets/P2000XTocTI-Logo.png" style="width:300px">
+        </div>
+        <div class="col-6"></div>
         <div class="col-1"><button>Settings</button></div>
         <div class="col-2"><button>Logout</button></div>
       </div>
       <div class="row">
-        <div class="col"><h2 class = "row text-left text">Account von name, stand, datum</h2></div>
+        <div class="col"><h2 class = "row text-left text">Account von {{vorname}}, Kontostand am {{fullDate}}: 0€</h2></div>
       </div>
       <div class="row h-100">
         <div class="col-5 h-50">
@@ -60,27 +63,51 @@
       </div>
 
     </div>
+    </div>
   </body>
 </template>
 
 <script>
+import {onMounted, ref} from "vue";
+import axios from "axios";
+
 export default {
-  name: "Us-er"
+  name: "Us-er",
+  setup() {
+    const vorname = ref("userKonnteNichtGeladenWerden");
+    const date = new Date();
+    const fullDate = date.getDate()+"-"+date.getMonth()+"-"+date.getFullYear();
+
+
+    onMounted(async () => {
+
+      const {data} = await axios.get('http://localhost:8080/api/user');
+      //console.log(data.vorname)
+      vorname.value = data.vorname;
+
+    });
+    return{
+      vorname,
+      fullDate
+    }
+
+  }
+
 }
 </script>
 
 <style scoped>
   [class*="col"]{
     padding:1rem;
-    background-color: #2c3e50;
-    border:2px solid #fff;
-    color: #fff;
+    background-color: #fff;
+    border:2px solid #000000;
+    color: #000000;
   }
   [class*="table"]{
     padding:1rem;
-    background-color: #2c3e50;
-    border:2px solid #fff;
-    color: #fff;
+    background-color: #fff;
+    border:2px solid #000000;
+    color: #000000;
   }
 
 </style>

@@ -1,33 +1,38 @@
 <template>
 <div>
-  <h3>{{ message }}</h3>
+  <!--<h3>{{ message }}</h3>  v-if= -->
+  <!--<user></user>-->
+  <div v-if="auth"><h3><user></user></h3></div>
+  <div v-if="!auth"><h3>Not logged in</h3></div>
 </div>
 </template>
 
 <script>
 import {onMounted, ref} from "vue";
 import axios from "axios";
+import User from "@/components/User";
 
 
 export default {
   name: "UserView",
-  components: {},
+  components: { User },
 
-  setup(){
-    const message = ref('You are not Logged in');
+  setup() {
+    const auth = ref(false);
 
     onMounted(async () => {
-      const {data} = await axios.get('http://localhost:8080/api/user')
-      console.log(data)
-      message.value = `Hi ${data.vorname} ${data.nachname}`;
-    })
-
-    return {
-      message
+      try{
+        await axios.get('http://localhost:8080/api/user');
+        auth.value = true
+      } catch (e) {
+        auth.value =false;
+      }
+    });
+    return{
+      auth
     }
-  }
 
-}
+}}
 </script>
 
 <style>
