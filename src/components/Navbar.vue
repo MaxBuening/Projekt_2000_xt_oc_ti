@@ -50,7 +50,7 @@ export default {
           .then(async function (response) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${response.data}`
             auth.value= false;
-        this.forceUpdate();
+            this.forceUpdate();
       })
           .catch(function (error) {
             console.log(error);

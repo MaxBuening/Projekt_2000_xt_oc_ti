@@ -51,7 +51,7 @@
         <!-- End copied part from bootstrap -->
         <div class="col-7 ">
           <div class="row">
-            <p class="text-center">Kontogang hinzufügen</p>
+            <konto-gang :userid="id"></konto-gang>
           </div>
           <div class="row">
             <div class="col">Datum</div>
@@ -61,7 +61,6 @@
           </div>
         </div>
       </div>
-
     </div>
     </div>
   </body>
@@ -70,25 +69,27 @@
 <script>
 import {onMounted, ref} from "vue";
 import axios from "axios";
+import KontoGang from "@/components/Kontogang";
 
 export default {
   name: "Us-er",
+  components: {KontoGang},
   setup() {
     const vorname = ref("userKonnteNichtGeladenWerden");
     const date = new Date();
     const fullDate = date.getDate()+"-"+date.getMonth()+"-"+date.getFullYear();
-
-
+    const id =ref(0);
     onMounted(async () => {
 
       const {data} = await axios.get('http://localhost:8080/api/user');
       //console.log(data.vorname)
       vorname.value = data.vorname;
-
+      id.value = data.id;
     });
     return{
       vorname,
-      fullDate
+      fullDate,
+      id
     }
 
   }
