@@ -51,7 +51,7 @@
         <!-- End copied part from bootstrap -->
         <div class="col-7 ">
           <div class="row">
-            <konto-gang :userid="id"></konto-gang>
+          <konto-gang></konto-gang>
           </div>
           <div class="row">
             <div class="col">Datum</div>
@@ -70,6 +70,8 @@
 import {onMounted, ref} from "vue";
 import axios from "axios";
 import KontoGang from "@/components/Kontogang";
+import {store} from "@/assets/store";
+
 
 export default {
   name: "Us-er",
@@ -78,18 +80,16 @@ export default {
     const vorname = ref("userKonnteNichtGeladenWerden");
     const date = new Date();
     const fullDate = date.getDate()+"-"+date.getMonth()+"-"+date.getFullYear();
-    const id =ref(0);
     onMounted(async () => {
-
       const {data} = await axios.get('http://localhost:8080/api/user');
-      //console.log(data.vorname)
       vorname.value = data.vorname;
-      id.value = data.id;
+      store.userId = data.id;
+      console.log(store.userId)
     });
+
     return{
       vorname,
       fullDate,
-      id
     }
 
   }

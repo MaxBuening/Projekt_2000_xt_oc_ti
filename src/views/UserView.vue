@@ -25,6 +25,7 @@ export default {
         await axios.get('http://localhost:8080/api/user');
         auth.value = true
       } catch (e) {
+        console.log(auth)
         auth.value =false;
       }
     });

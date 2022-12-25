@@ -1,5 +1,5 @@
 <template>
- <form @submit.prevent="submit">
+ <form @submit.prevent="submit()">
    <!-- Button trigger modal -->
    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kontogang">
      Kontogang hinzufügen
@@ -10,20 +10,21 @@
      <div class="modal-dialog">
        <div class="modal-content">
          <div class="modal-header">
-           <h1 class="modal-title fs-5" id="KontogangModalLabel">Kontogang</h1>
+           <h1 id="UserId" v>{{store.userId}}</h1>
+           <h1 class="modal-title fs-5" id="KontogangModalLabel">Kontogang - UserID: {{userId}}</h1>
            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
          </div>
          <div class="modal-body">
            <div class="form-floating">
-             <input v-model="dataKonto.datum" class="form-control"  placeholder="Datum">
+             <input v-model="kontodaten.datum" class="form-control"  placeholder="Datum">
              <label>Datum</label>
            </div>
            <div class="form-floating">
-             <input v-model="dataKonto.beschriftug" class="form-control"  placeholder="Beschreibung">
+             <input v-model="kontodaten.beschriftug" class="form-control"  placeholder="Beschreibung">
              <label>Beschreibung</label>
            </div>
            <div class="form-floating">
-             <input v-model.number="dataKonto.betrag" class="form-control"  placeholder="Betrag">
+             <input v-model.number="kontodaten.amount" class="form-control"  placeholder="Betrag">
              <label>Betrag</label>
            </div>
          </div>
@@ -41,33 +42,33 @@
 <script>
 
 
-
 import axios from "axios";
-import {ref} from "vue";
-
-
+import {store} from "@/assets/store";
+import {reactive} from "vue";
 export default {
   name: "Konto-gang",
-  props: {userId: Number},
 
-setup(){
-    const benutzerId = ref(0);
-    benutzerId.value = () => {this.props.userId()};
-    const dataKonto =  {
-        benutzerID_Fk: benutzerId,
-        betrag: '',
-        beschriftug: '',
-        datum: ''
-    };
-  const submit = async () => {
-    console.log(dataKonto)
-    await axios.post('http://localhost:8080/api/user/zugang', dataKonto)
-  };
-  return {
-    dataKonto,
-    submit,
+  setup(){
+    console.log(store.userId)
+    const kontodaten = reactive( {
+      amount : parseFloat(''),
+      beschriftug : '',
+      datum : ''
+    });
+    const submit = async () => {
+      await axios.post('http://localhost:8080/api/user/zugang', {
+        benutzerID_Fk: store.userId,
+        amount: kontodaten.amount,
+        beschriftung: kontodaten.beschriftug,
+        datum: kontodaten.datum
+      })
+    }
+    return{
+      kontodaten,
+      submit,
+      store
+    }
   }
-}
 
 }
 </script>
