@@ -1,4 +1,5 @@
 import axios from "axios";
+import {store} from "@/assets/store";
 
 axios.interceptors.response.use(resp => resp, async error => {
 
@@ -7,7 +8,10 @@ axios.interceptors.response.use(resp => resp, async error => {
 
     if (response.status ===200){
         axios.defaults.headers.common['Authorization'] = `Bearer ${response.data}`
+        store.auth = true;
         return axios(error.config);
+    } else{
+        store.auth = false;
     }
    }
     return error;

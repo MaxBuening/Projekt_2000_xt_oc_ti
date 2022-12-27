@@ -14,6 +14,7 @@
            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
          </div>
          <div class="modal-body">
+           <div id="liveAlertPlaceholder"></div>
            <div>
             <Datepicker v-model="kontodaten.datum" :enable-time-picker ="false" :format ="format" placeholder="Datum" ></Datepicker>
            </div>
@@ -28,7 +29,7 @@
          </div>
          <div class="modal-footer">
            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-             <button type="submit" class="btn btn-primary">Speichern</button>
+             <button type="submit" class="btn btn-primary" id="liveAlertBtn">Speichern</button>
          </div>
        </div>
      </div>
@@ -66,9 +67,28 @@ export default {
     });
 
     const submit = async () => {
-      if (kontodaten.amount === null || kontodaten.datum === "" || kontodaten.beschriftug === ""){
+      if (kontodaten.amount === "" || kontodaten.datum === "" || kontodaten.beschriftug === ""){
         fehler = true;
         console.log(fehler)
+        const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+
+        const alert = (message, type) => {
+          const wrapper = document.createElement('div')
+          wrapper.innerHTML = [
+            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+            `   <div>${message}</div>`,
+            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+            '</div>'
+          ].join('')
+          alertPlaceholder.append(wrapper)
+        }
+        const alertTrigger = document.getElementById('liveAlertBtn')
+        if (alertTrigger) {
+          alertTrigger.addEventListener('click', () => {
+            alert('Überprüfe deine Eingabe irgendetwas stimmt noch nicht', 'danger')
+          })
+        }
+
       } else {
         await axios.post('http://localhost:8080/api/user/zugang', {
           benutzerID_Fk: store.userId,
