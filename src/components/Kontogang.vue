@@ -106,10 +106,23 @@ export default {
         }
 
       } else {
-        console.log(document.getElementById("radioButtonSuper"))
+        console.log(document.getElementById("flexRadioDefault1").checked)
+         let realamount = kontodaten.amount
+
+        if(document.getElementById("flexRadioDefault2").checked){
+          if (!realamount < 0){
+            realamount = kontodaten.amount * -1
+          }
+        } else {
+          if (realamount < 0){
+            realamount = kontodaten.amount * -1
+          }
+        }
+
+
         await axios.post('http://localhost:8080/api/user/zugang', {
           benutzerID_Fk: store.userId,
-          amount: kontodaten.amount,
+          amount: realamount,
           beschriftung: kontodaten.beschriftug,
           datum: kontodaten.datum
         })
