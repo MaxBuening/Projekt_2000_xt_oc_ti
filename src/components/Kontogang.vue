@@ -67,7 +67,6 @@ export default {
   name: "Konto-gang",
   components: {Datepicker},
   setup(){
-    let fehler = false;
     const format = (date) => {
       const day = date.getDate();
       const month = date.getMonth() + 1;
@@ -84,8 +83,6 @@ export default {
 
     const submit = async () => {
       if (kontodaten.amount === "" || kontodaten.datum === "" || kontodaten.beschriftug === ""){
-        fehler = true;
-        console.log(fehler)
         const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
 
         const alert = (message, type) => {
@@ -118,15 +115,12 @@ export default {
             realamount = kontodaten.amount * -1
           }
         }
-
-
         await axios.post('http://localhost:8080/api/user/zugang', {
           benutzerID_Fk: store.userId,
           amount: realamount,
           beschriftung: kontodaten.beschriftug,
           datum: kontodaten.datum
         })
-        fehler = false;
       }
 
 
@@ -136,8 +130,7 @@ export default {
       kontodaten,
       submit,
       store,
-      format,
-      fehler
+      format
     }
   }
 
