@@ -79,7 +79,7 @@ export default {
   setup() {
     const vorname = ref("userKonnteNichtGeladenWerden");
     const date = new Date();
-    const fullDate = date.getDate()+"-"+date.getMonth()+"-"+date.getFullYear();
+    const fullDate = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
     onMounted(async () => {
       const {data} = await axios.get('http://localhost:8080/api/user');
       vorname.value = data.vorname;

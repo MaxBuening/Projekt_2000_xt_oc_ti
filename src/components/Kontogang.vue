@@ -26,6 +26,22 @@
              <input v-model.number="kontodaten.amount" class="form-control"  placeholder="Betrag">
              <label>Betrag</label>
            </div>
+           <div class="RadioButton" id="radioButtonSuper">
+
+             <div class="form-check">
+               <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="ZugangSelect" checked>
+               <label class="form-check-label" for="flexRadioDefault1">
+                 Zugang
+               </label>
+             </div>
+             <div class="form-check">
+               <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="AbgangSelect">
+               <label class="form-check-label" for="flexRadioDefault2">
+                 Abgang
+               </label>
+             </div>
+           </div>
+
          </div>
          <div class="modal-footer">
            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -90,6 +106,7 @@ export default {
         }
 
       } else {
+        console.log(document.getElementById("radioButtonSuper"))
         await axios.post('http://localhost:8080/api/user/zugang', {
           benutzerID_Fk: store.userId,
           amount: kontodaten.amount,
@@ -115,5 +132,6 @@ export default {
 </script>
 
 <style scoped>
+  .form-check{text-align: left}
 
 </style>
