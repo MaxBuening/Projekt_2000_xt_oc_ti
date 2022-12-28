@@ -26,31 +26,29 @@
 </template>
 
 <script>
+
+
 import {reactive} from "vue";
-import axios from 'axios';
+import axios from "axios";
 import {useRouter} from "vue-router/dist/vue-router";
 
 export default {
   name: "Reg-ister",
-  setup(){
+
+  setup() {
     const data = reactive({
       vorname: '',
       nachname: '',
       benutzername: '',
       passwort: ''
     });
-      const router = useRouter();
+    const router = useRouter();
       const submit = async () => {
         console.log(data)
         await axios.post('http://localhost:8080/api/register', data)
         await router.push('/login')
       }
       return {data, submit}
-
-
-
-
-
 
   }
 }

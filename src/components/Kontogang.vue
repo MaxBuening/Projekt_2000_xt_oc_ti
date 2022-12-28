@@ -103,12 +103,14 @@ export default {
         }
 
       } else {
-        console.log(document.getElementById("flexRadioDefault1").checked)
+        console.log(document.getElementById("flexRadioDefault2").checked)
          let realamount = kontodaten.amount
 
         if(document.getElementById("flexRadioDefault2").checked){
-          if (!realamount < 0){
+          console.log()
+          if (!(realamount < 0)){
             realamount = kontodaten.amount * -1
+            console.log(realamount)
           }
         } else {
           if (realamount < 0){

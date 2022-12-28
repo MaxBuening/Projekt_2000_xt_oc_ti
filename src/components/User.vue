@@ -13,7 +13,7 @@
         <div class="col-2"><button>Logout</button></div>
       </div>
       <div class="row">
-        <div class="col"><h2 class = "row text-left text">Account von {{vorname}}, Kontostand am {{fullDate}}: 0€</h2></div>
+        <div class="col"><h2 class = "row text-left text">Account von {{vorname}}, Kontostand am {{fullDate}}: {{ betrag }}€</h2></div>
       </div>
       <div class="row h-100">
         <div class="col-5 h-50">
@@ -77,6 +77,7 @@ export default {
   name: "Us-er",
   components: {KontoGang},
   setup() {
+    let betrag = [];
     const vorname = ref("userKonnteNichtGeladenWerden");
     const date = new Date();
     const fullDate = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
@@ -85,11 +86,18 @@ export default {
       vorname.value = data.vorname;
       store.userId = data.id;
       console.log(store.userId)
+      for (let i = 0; i < data.kontostandIDs.length; i++) {
+        axios.get(`http://localhost:8080/api/user/zugang/${data.kontostandIDs[i]}`).then(function (response){
+          betrag.push(response.data.amount);
+        })
+      }
+      console.log(betrag.length)
     });
 
     return{
       vorname,
       fullDate,
+      betrag
     }
 
   }
