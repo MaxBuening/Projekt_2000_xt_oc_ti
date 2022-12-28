@@ -17,7 +17,6 @@
       </div>
       <div class="row h-100">
         <div class="col-5 h-50">
-          <!-- Begin copied part from bootstrap -->
           <table class="table">
             <thead>
             <tr>
@@ -48,7 +47,6 @@
             </tbody>
           </table>
         </div>
-        <!-- End copied part from bootstrap -->
         <div class="col-7 ">
           <div class="row">
           <konto-gang></konto-gang>
@@ -72,27 +70,29 @@ import axios from "axios";
 import KontoGang from "@/components/Kontogang";
 import {store} from "@/assets/store";
 
-
 export default {
+
   name: "Us-er",
   components: {KontoGang},
   setup() {
-    let betrag = [];
+    let betrag = 0;
     const vorname = ref("userKonnteNichtGeladenWerden");
-    const date = new Date();
+    var date = new Date();
     const fullDate = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
     onMounted(async () => {
-      const {data} = await axios.get('http://localhost:8080/api/user');
-      vorname.value = data.vorname;
-      store.userId = data.id;
-      console.log(store.userId)
-      for (let i = 0; i < data.kontostandIDs.length; i++) {
-        axios.get(`http://localhost:8080/api/user/zugang/${data.kontostandIDs[i]}`).then(function (response){
-          betrag.push(response.data.amount);
-        })
-      }
-      console.log(betrag)
-    });
+
+        const {data} = await axios.get('http://localhost:8080/api/user');
+        vorname.value = data.vorname;
+        store.userId = data.id;
+        console.log("User ID: "+store.userId)
+        for (let i = 0; i < data.kontostandIDs.length; i++) {
+          await axios.get(`http://localhost:8080/api/user/zugang/${data.kontostandIDs[i]}`).then(function(response){
+            betrag += response.data.amount;
+            return betrag
+          })
+        }
+        console.log("Betrag length: "+ betrag.length)
+      })
 
     return{
       vorname,
