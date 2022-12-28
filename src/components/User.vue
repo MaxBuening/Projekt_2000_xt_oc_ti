@@ -28,18 +28,6 @@
             </thead>
             <tbody id = "tbody1">
 
-              <!--
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              Muster
-              <tr><th scope = "row">x</th><td>Val1</td><td>Val2</td><td>Val3</td></tr>
-              -->
-
-
             </tbody>
           </table>
         </div>
@@ -73,6 +61,7 @@ export default {
 
   setup() {
     let betrag = 0;
+    let betrag2 = [];
     const vorname = ref("userKonnteNichtGeladenWerden");
     const date = new Date();
     const fullDate = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
@@ -103,16 +92,16 @@ export default {
         for (let i = 0; i < data.kontostandIDs.length; i++) {
           await axios.get(`http://localhost:8080/api/user/zugang/${data.kontostandIDs[i]}`).then(function(response){
             betrag += response.data.amount;
-            return betrag
+            betrag2.push(response.data.beschriftug)
+            addRowToKontogang(i+1,response.data.datum,response.data.beschriftug,response.data.amount)
+
+            return betrag;
           })
         }
         store.amount = betrag
-      console.log(store.kontostandId)
+        console.log(store.kontostandId)
         console.log("Betrag: "+ betrag)
-
-        addRowToKontogang("1","10-12-2002","Kekse","100")
-
-
+        console.log("Betrag2: "+betrag2)
       })
 
     return{
