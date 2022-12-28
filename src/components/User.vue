@@ -83,6 +83,7 @@ export default {
     onBeforeMount(async () => {
 
         const {data} = await axios.get('http://localhost:8080/api/user');
+        store.kontostandId = data
         vorname.value = data.vorname;
         store.userId = data.id;
         console.log("User ID: "+store.userId)
@@ -93,6 +94,7 @@ export default {
           })
         }
         store.amount = betrag
+      console.log(store.kontostandId)
         console.log("Betrag: "+ betrag)
 
       })

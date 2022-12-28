@@ -1,7 +1,7 @@
 <template>
  <form @submit.prevent="submit()">
    <!-- Button trigger modal -->
-   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kontogang">
+   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kontogang" @click="store.auth=true">
      Kontogang hinzufügen
    </button>
 
@@ -14,7 +14,9 @@
            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
          </div>
          <div class="modal-body">
-           <div id="liveAlertPlaceholder"></div>
+           <div class="alert alert-danger" role="alert" v-if="!store.auth">
+             Eingabe Überprüfen!
+           </div>
            <div>
             <Datepicker v-model="kontodaten.datum" :enable-time-picker ="false" :format ="format" placeholder="Datum" ></Datepicker>
            </div>
@@ -41,7 +43,6 @@
                </label>
              </div>
            </div>
-
          </div>
          <div class="modal-footer">
            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -76,33 +77,16 @@ export default {
     }
 
     const kontodaten = reactive( {
-      amount : parseFloat(''),
+      amount : parseFloat('0'),
       beschriftug : '',
       datum : ''
     });
 
     const submit = async () => {
-      if (kontodaten.amount === "" || kontodaten.datum === "" || kontodaten.beschriftug === ""){
-        const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
-
-        const alert = (message, type) => {
-          const wrapper = document.createElement('div')
-          wrapper.innerHTML = [
-            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-            `   <div>${message}</div>`,
-            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-            '</div>'
-          ].join('')
-          alertPlaceholder.append(wrapper)
-        }
-        const alertTrigger = document.getElementById('liveAlertBtn')
-        if (alertTrigger) {
-          alertTrigger.addEventListener('click', () => {
-            alert('Überprüfe deine Eingabe irgendetwas stimmt noch nicht', 'danger')
-          })
-        }
-
+      if (kontodaten.amount === 0 || kontodaten.datum === "" || kontodaten.beschriftug === "" || kontodaten.amount === ''){
+      store.auth = false
       } else {
+        store.auth = true
         console.log(document.getElementById("flexRadioDefault2").checked)
          let realamount = kontodaten.amount
 
