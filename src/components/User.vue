@@ -1,6 +1,5 @@
 <template>
-  <header>
-  </header>
+
   <body>
     <div class="wrap">
     <div class="container-fluid min-vh-100">
@@ -9,27 +8,14 @@
           <img alt="Logo" src="../assets/P2000XTocTI-Logo.png" style="width:300px">
         </div>
         <div class="col-6"></div>
-        <div class="col-1"><button>Settings</button></div>
-        <div class="col-2"><button>Logout</button></div>
       </div>
       <div class="row">
         <div id="AAA" class="col"><h2 class = "row text-left text">Account von {{vorname}}, Kontostand am {{fullDate}}: {{ store.amount }}€</h2></div>
       </div>
       <div class="row h-100">
         <div class="col-5 h-50">
-          <table class="table" id="kontogangTable">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Datum</th>
-                <th scope="col">Zugang/Abgang</th>
-                <th scope="col">Betrag</th>
-              </tr>
-            </thead>
-            <tbody id = "tbody1">
-
-            </tbody>
-          </table>
+          <div><button @click="reload">Tabelle neu laden</button></div>
+          <umsatz-tabelle :key="table_reload"></umsatz-tabelle>
         </div>
         <div class="col-7 ">
           <div class="row">
@@ -53,34 +39,32 @@ import {onBeforeMount, ref} from "vue";
 import axios from "axios";
 import KontoGang from "@/components/Kontogang";
 import {store} from "@/assets/store";
+import UmsatzTabelle from "@/components/umsatzTabelle";
+
 
 export default {
 
   name: "Us-er",
-  components: {KontoGang},
+  components: {UmsatzTabelle, KontoGang},
+
+  data (){
+    return {
+      table_reload : 0
+    }
+  },
+
+  methods: {
+    reload(){
+      this.table_reload++
+    }
+  },
 
   setup() {
     let betrag = 0;
-    let betrag2 = [];
     const vorname = ref("userKonnteNichtGeladenWerden");
     const date = new Date();
     const fullDate = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
 
-    function addRowToKontogang(Row, Datum, Beschreibung, Betrag){
-      let tableBody = document.getElementById("tbody1");
-      let newRow = tableBody.insertRow(0);
-
-      let number = newRow.insertCell(0)
-      let datum = newRow.insertCell(1);
-      let abgangZugang = newRow.insertCell(2);
-      let betrag1 = newRow.insertCell(3);
-
-      number.innerHTML='<b>'+Row+'</b>';
-      datum.innerHTML=Datum;
-      abgangZugang.innerHTML=Beschreibung;
-      betrag1.innerHTML=Betrag;
-
-    }
 
     onBeforeMount(async () => {
 
@@ -92,16 +76,12 @@ export default {
         for (let i = 0; i < data.kontostandIDs.length; i++) {
           await axios.get(`http://localhost:8080/api/user/zugang/${data.kontostandIDs[i]}`).then(function(response){
             betrag += response.data.amount;
-            betrag2.push(response.data.beschriftug)
-            addRowToKontogang(i+1,response.data.datum,response.data.beschriftug,response.data.amount)
-
             return betrag;
           })
         }
         store.amount = betrag
         console.log(store.kontostandId)
         console.log("Betrag: "+ betrag)
-        console.log("Betrag2: "+betrag2)
       })
 
     return{

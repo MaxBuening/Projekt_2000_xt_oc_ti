@@ -4,5 +4,6 @@ export const store = reactive({
     userId : Number,
     auth : Boolean,
     amount : Number,
-    kontostandId : Object
+    kontostandId : Object,
+    succes : Boolean
 })

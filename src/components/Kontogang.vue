@@ -1,7 +1,7 @@
 <template>
  <form @submit.prevent="submit()">
    <!-- Button trigger modal -->
-   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kontogang" @click="store.auth=true">
+   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kontogang" @click="click">
      Kontogang hinzufügen
    </button>
 
@@ -16,6 +16,9 @@
          <div class="modal-body">
            <div class="alert alert-danger" role="alert" v-if="!store.auth">
              Eingabe Überprüfen!
+           </div>
+           <div class="alert alert-success" role="alert" v-if="store.succes">
+             Whoop Whoop
            </div>
            <div>
             <Datepicker v-model="kontodaten.datum" :enable-time-picker ="false" :format ="format" placeholder="Datum" ></Datepicker>
@@ -67,6 +70,13 @@ import '@vuepic/vue-datepicker/dist/main.css';
 export default {
   name: "Konto-gang",
   components: {Datepicker},
+  methods: {
+    click(){
+      store.auth = true;
+      store.succes = false;
+    }
+  },
+
   setup(){
     const format = (date) => {
       const day = date.getDate();
@@ -83,8 +93,10 @@ export default {
     });
 
     const submit = async () => {
-      if (kontodaten.amount === 0 || kontodaten.datum === "" || kontodaten.beschriftug === "" || kontodaten.amount === ''){
-      store.auth = false
+
+      if (kontodaten.amount === 0 || kontodaten.datum === "" || kontodaten.beschriftug === "" || kontodaten.amount === null){
+        store.auth = false
+        store.succes = false
       } else {
         store.auth = true
         console.log(document.getElementById("flexRadioDefault2").checked)
@@ -107,6 +119,9 @@ export default {
           beschriftung: kontodaten.beschriftug,
           datum: kontodaten.datum
         })
+        store.succes = true
+        const {data} = await axios.get('http://localhost:8080/api/user');
+        store.kontostandId = data
       }
 
 
