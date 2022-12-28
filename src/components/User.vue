@@ -17,33 +17,29 @@
       </div>
       <div class="row h-100">
         <div class="col-5 h-50">
-          <table class="table">
+          <table class="table" id="kontogangTable">
             <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-            </tr>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Datum</th>
+                <th scope="col">Zugang/Abgang</th>
+                <th scope="col">Betrag</th>
+              </tr>
             </thead>
-            <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td colspan="2">Larry the Bird</td>
-              <td>@twitter</td>
-            </tr>
+            <tbody id = "tbody1">
+
+              <!--
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+              </tr>
+              Muster
+              <tr><th scope = "row">x</th><td>Val1</td><td>Val2</td><td>Val3</td></tr>
+              -->
+
+
             </tbody>
           </table>
         </div>
@@ -80,6 +76,23 @@ export default {
     const vorname = ref("userKonnteNichtGeladenWerden");
     const date = new Date();
     const fullDate = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
+
+    function addRowToKontogang(Row, Datum, Beschreibung, Betrag){
+      let tableBody = document.getElementById("tbody1");
+      let newRow = tableBody.insertRow(0);
+
+      let number = newRow.insertCell(0)
+      let datum = newRow.insertCell(1);
+      let abgangZugang = newRow.insertCell(2);
+      let betrag1 = newRow.insertCell(3);
+
+      number.innerHTML='<b>'+Row+'</b>';
+      datum.innerHTML=Datum;
+      abgangZugang.innerHTML=Beschreibung;
+      betrag1.innerHTML=Betrag;
+
+    }
+
     onBeforeMount(async () => {
 
         const {data} = await axios.get('http://localhost:8080/api/user');
@@ -96,6 +109,9 @@ export default {
         store.amount = betrag
       console.log(store.kontostandId)
         console.log("Betrag: "+ betrag)
+
+        addRowToKontogang("1","10-12-2002","Kekse","100")
+
 
       })
 
