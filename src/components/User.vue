@@ -91,7 +91,7 @@ export default {
           betrag.push(response.data.amount);
         })
       }
-      console.log(betrag.length)
+      console.log(betrag)
     });
 
     return{
