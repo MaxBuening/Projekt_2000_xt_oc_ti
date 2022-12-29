@@ -73,6 +73,7 @@ export default {
     function sortDate(correctFormatArray){
       //Correct format array contains all responses with dates in arrays in string format
       let copyArray = correctFormatArray
+
       let combinedStringFormat = ""
       console.log(correctFormatArray)
 
@@ -82,10 +83,7 @@ export default {
 
         for (let dateArray = 0; dateArray<correctFormatArray[i].data.datum.length; dateArray++){
           combinedStringFormat += correctFormatArray[i].data.datum[dateArray]
-
           //The dates in copy array are now combined strings
-
-
         }
         copyArray[i].data.datum=parseFloat(combinedStringFormat)
         console.log(parseFloat(combinedStringFormat))

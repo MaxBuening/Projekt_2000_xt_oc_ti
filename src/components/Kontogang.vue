@@ -101,7 +101,7 @@ export default {
 
     const submit = async () => {
 
-      if (kontodaten.amount === 0 || kontodaten.datum === '' || kontodaten.beschriftug === '' || kontodaten.amount === null){
+      if (kontodaten.amount === 0 || kontodaten.datum === '' || kontodaten.beschriftug === '' || kontodaten.amount === null || kontodaten.amount===""){
         store.auth = false
         store.success = false
       } else {
