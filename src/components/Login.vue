@@ -39,10 +39,11 @@ export default {
 
       },{withCredentials: true})
           .then(async function (response) {
-            //console.log(response)
-            console.log(response.request.responseText)
+            console.log(response)
             axios.defaults.headers.common['Authorization'] = `Bearer ${response.data}`
-            await router.push('/user')
+            if (response.message !== "Request failed with status code 400"){
+              await router.push('/user')
+            }
           })
           .catch(function (error) {
             console.log(error);

@@ -1,5 +1,4 @@
 <template>
-
   <body>
     <div class="wrap">
     <div class="container-fluid min-vh-100">
@@ -64,7 +63,6 @@ export default {
     const vorname = ref("userKonnteNichtGeladenWerden");
     const date = new Date();
     const fullDate = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
-
 
     onBeforeMount(async () => {
 
