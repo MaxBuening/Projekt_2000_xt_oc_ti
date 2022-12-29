@@ -17,7 +17,7 @@
            <div class="alert alert-danger" role="alert" v-if="!store.auth">
              Eingabe Überprüfen!
            </div>
-           <div class="alert alert-success" role="alert" v-if="store.succes">
+           <div class="alert alert-success" role="alert" v-if="store.success">
              Whoop Whoop
            </div>
            <div>
@@ -73,16 +73,23 @@ export default {
   methods: {
     click(){
       store.auth = true;
-      store.succes = false;
+      store.success = false;
     }
   },
 
   setup(){
     const format = (date) => {
-      const day = date.getDate();
-      const month = date.getMonth() + 1;
-      const year = date.getFullYear();
+      let day = date.getDate();
+      if (day < 10){
+        day = "0"+day.toString()
+      }
 
+      let month = date.getMonth() + 1;
+      if (month < 10){
+        month = "0" + month.toString()
+      }
+
+      const year = date.getFullYear();
       return `Ausgewähltes Datum ist: ${day}.${month}.${year}`;
     }
 
@@ -96,7 +103,7 @@ export default {
 
       if (kontodaten.amount === 0 || kontodaten.datum === "" || kontodaten.beschriftug === "" || kontodaten.amount === null){
         store.auth = false
-        store.succes = false
+        store.success = false
       } else {
         store.auth = true
         console.log(document.getElementById("flexRadioDefault2").checked)
@@ -119,12 +126,11 @@ export default {
           beschriftung: kontodaten.beschriftug,
           datum: kontodaten.datum
         })
-        store.succes = true
+        console.log("Result: "+kontodaten.datum)
+        store.success = true
         const {data} = await axios.get('http://localhost:8080/api/user');
         store.kontostandId = data
       }
-
-
 
     }
     return{

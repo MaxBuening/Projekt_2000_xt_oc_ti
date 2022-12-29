@@ -5,5 +5,5 @@ export const store = reactive({
     auth : Boolean,
     amount : Number,
     kontostandId : Object,
-    succes : Boolean
+    success : Boolean
 })
