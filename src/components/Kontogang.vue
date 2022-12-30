@@ -132,6 +132,7 @@ export default {
         const {data} = await axios.get('http://localhost:8080/api/user');
         store.kontostandId = data
         store.newAmount = 0;
+        store.table_reload++
         for (let i = 0; i < data.kontostandIDs.length; i++) {
           await axios.get(`http://localhost:8080/api/user/zugang/${data.kontostandIDs[i]}`).then(function(response){
             store.newAmount += response.data.amount;

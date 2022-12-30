@@ -56,7 +56,6 @@ export default {
             auth.value= false;
             store.tabelle = false;
             store.table_reload++;
-            this.forceUpdate();
       })
           .catch(function (error) {
             console.log(error);

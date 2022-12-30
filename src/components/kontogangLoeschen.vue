@@ -19,7 +19,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" @click="deleteTransaktion">Löschen</button>
+          <button type="button" class="btn btn-primary" @click="deleteTransaktion" data-dismiss="modal">Löschen</button>
         </div>
       </div>
     </div>
@@ -49,6 +49,7 @@ export default {
             store.newAmount += response.data.amount;
           })
         }
+        store.table_reload++;
       })
     }
   }

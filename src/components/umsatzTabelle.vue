@@ -10,7 +10,7 @@
       <th scope="col">Betrag</th>
     </tr>
     </thead>
-    <tbody class="table table-success table-striped" id = "tbody1" >
+    <tbody class="table" id = "tbody1" >
     </tbody>
   </table>
   </div>
@@ -30,15 +30,18 @@ export default {
 
     function addRowToKontogang(Row,ID, Datum, Beschreibung, Betrag){
       let tableBody = document.getElementById("tbody1");
-
-
       let newRow = tableBody.insertRow(0);
-
       let number = newRow.insertCell(0)
       let id = newRow.insertCell(1)
       let datum = newRow.insertCell(2);
       let abgangZugang = newRow.insertCell(3);
       let betrag1 = newRow.insertCell(4);
+
+      if(Betrag < 0){
+        newRow.className = "p-3 mb-2 bg-danger text-white";
+      } else {
+        newRow.className = "p-3 mb-2 bg-success text-white";
+      }
 
       number.innerHTML='<b>'+Row+'</b>';
       id.innerHTML=ID
@@ -71,7 +74,6 @@ export default {
         kontogangArray[i].data.datum = dateToBeEdited
 
       }
-      console.log(kontogangArray)
       return kontogangArray
     }
 
@@ -80,10 +82,10 @@ export default {
       let copyArray = correctFormatArray
 
       let combinedStringFormat = ""
-      console.log(correctFormatArray)
+
 
       for (let i = 0; i<correctFormatArray.length; i++){
-        console.log(correctFormatArray[i].data.datum)
+
         combinedStringFormat = ""
 
         for (let dateArray = 0; dateArray<correctFormatArray[i].data.datum.length; dateArray++){
@@ -91,7 +93,7 @@ export default {
           //The dates in copy array are now combined strings
         }
         copyArray[i].data.datum=parseFloat(combinedStringFormat)
-        console.log(parseFloat(combinedStringFormat))
+
       }
       //Sort them
       for (let x = 0; x<copyArray.length; x++){
@@ -110,7 +112,7 @@ export default {
         let interimString = copyArray[i].data.datum.toString();
         copyArray[i].data.datum = interimString.slice(0,4)+"-"+interimString.slice(4,6)+"-"+interimString.slice(6,8);
       }
-      console.log(copyArray)
+
       return copyArray
 
     }
@@ -128,7 +130,6 @@ export default {
           responseArray.push(response)
           //datum = response.data.datum;
           //day = datum;
-          console.log(response.data.datum)
           //addRowToKontogang(i+1,response.data.datum,response.data.beschriftug,response.data.amount)
         })
       }
@@ -138,9 +139,11 @@ export default {
       let tableBody = document.getElementById("tbody1");
       if(tableBody.rows.length > 0) tableBody.innerHTML = "";
 
+
       for (let i = sortedArray.length-1; i>=0; i--){
         addRowToKontogang(i+1,sortedArray[i].data.id,sortedArray[i].data.datum,sortedArray[i].data.beschriftug,sortedArray[i].data.amount)
       }
+
 
     })
 
@@ -153,6 +156,8 @@ export default {
 </script>
 
 <style scoped>
+
+
 .scrollable{
   height: 400px;
   overflow: scroll;
