@@ -9,7 +9,7 @@
         <div class="col-6"></div>
       </div>
       <div class="row">
-        <div id="AAA" class="col"><h2 class = "row text-left text">Account von {{vorname}}, Kontostand am {{fullDate}}: {{ store.amount }}€</h2></div>
+        <div id="AAA" class="col"><h2 class = "row text-left text">Account von {{vorname}}, Kontostand am {{fullDate}}: {{ store.newAmount || store.amount }}€</h2></div>
       </div>
       <div class="row h-100">
         <div class="col-5 h-50">
@@ -19,6 +19,7 @@
         <div class="col-7 ">
           <div class="row">
           <konto-gang></konto-gang>
+            <kontogang-loeschen></kontogang-loeschen>
           </div>
           <div class="row">
             <div class="col">Datum</div>
@@ -39,12 +40,13 @@ import axios from "axios";
 import KontoGang from "@/components/Kontogang";
 import {store} from "@/assets/store";
 import UmsatzTabelle from "@/components/umsatzTabelle";
+import KontogangLoeschen from "@/components/kontogangLoeschen";
 
 
 export default {
 
   name: "Us-er",
-  components: {UmsatzTabelle, KontoGang},
+  components: {KontogangLoeschen, UmsatzTabelle, KontoGang},
 
   data (){
     return {

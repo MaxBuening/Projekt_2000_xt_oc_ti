@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import {onBeforeMount} from "vue";
+import {onMounted} from "vue";
 import axios from "axios";
 import {store} from "@/assets/store";
 
@@ -29,6 +29,8 @@ export default {
 
     function addRowToKontogang(Row, Datum, Beschreibung, Betrag){
       let tableBody = document.getElementById("tbody1");
+
+
       let newRow = tableBody.insertRow(0);
 
       let number = newRow.insertCell(0)
@@ -110,7 +112,7 @@ export default {
 
     }
 
-    onBeforeMount(async () => {
+    onMounted(async () => {
       let data = store.kontostandId
       let correctFormatArray = []
       let sortedArray = []
@@ -129,6 +131,10 @@ export default {
       }
       correctFormatArray = correctDateFormat(responseArray)
       sortedArray = sortDate(correctFormatArray)
+
+      let tableBody = document.getElementById("tbody1");
+      if(tableBody.rows.length > 0) tableBody.innerHTML = "";
+
       for (let i = sortedArray.length-1; i>=0; i--){
         addRowToKontogang(i+1,sortedArray[i].data.datum,sortedArray[i].data.beschriftug,sortedArray[i].data.amount)
       }

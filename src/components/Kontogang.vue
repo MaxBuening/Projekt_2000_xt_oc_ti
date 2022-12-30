@@ -101,7 +101,7 @@ export default {
 
     const submit = async () => {
 
-      if (kontodaten.amount === 0 || kontodaten.datum === '' || kontodaten.beschriftug === '' || kontodaten.amount === null || kontodaten.amount===""){
+      if (kontodaten.amount === 0 || kontodaten.datum === '' || kontodaten.beschriftug === '' || kontodaten.amount === null || kontodaten.amount === ""){
         store.auth = false
         store.success = false
       } else {
@@ -126,10 +126,20 @@ export default {
           beschriftung: kontodaten.beschriftug,
           datum: kontodaten.datum
         })
+
+        //nach Speichern -> get Kontostand
+        //kontostand refreshen
+
         console.log("Result: "+kontodaten.datum)
         store.success = true
         const {data} = await axios.get('http://localhost:8080/api/user');
         store.kontostandId = data
+        for (let i = 0; i < data.kontostandIDs.length; i++) {
+          await axios.get(`http://localhost:8080/api/user/zugang/${data.kontostandIDs[i]}`).then(function(response){
+            store.newAmount += response.data.amount;
+
+          })
+        }
       }
 
     }
