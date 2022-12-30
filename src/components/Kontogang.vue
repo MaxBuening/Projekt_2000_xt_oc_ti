@@ -127,21 +127,19 @@ export default {
           datum: kontodaten.datum
         })
 
-        //nach Speichern -> get Kontostand
-        //kontostand refreshen
-
         console.log("Result: "+kontodaten.datum)
         store.success = true
         const {data} = await axios.get('http://localhost:8080/api/user');
         store.kontostandId = data
+        store.newAmount = 0;
         for (let i = 0; i < data.kontostandIDs.length; i++) {
           await axios.get(`http://localhost:8080/api/user/zugang/${data.kontostandIDs[i]}`).then(function(response){
             store.newAmount += response.data.amount;
-
           })
-        }
-      }
 
+        }
+        console.log(store.newAmount)
+      }
     }
     return{
       kontodaten,

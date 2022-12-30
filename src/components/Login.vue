@@ -31,15 +31,12 @@ export default {
   methods: {
 
     anfrage(){
-
-      console.log(this.anfrage.benutzername, this.anfrage.passwort)
       axios.post('http://localhost:8080/api/login', {
         benutzername: this.anfrage.benutzername,
         passwort: this.anfrage.passwort
 
       },{withCredentials: true})
           .then(async function (response) {
-            console.log(response)
             axios.defaults.headers.common['Authorization'] = `Bearer ${response.data}`
             if (response.message !== "Request failed with status code 400"){
               await router.push('/user')

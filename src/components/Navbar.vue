@@ -38,7 +38,6 @@ export default {
     onMounted(async () => {
       try{
         const resp = await axios.get('http://localhost:8080/api/user');
-        console.log(resp.message)
         if(resp.message !== "Request failed with status code 401"){
           auth.value = true;
         }

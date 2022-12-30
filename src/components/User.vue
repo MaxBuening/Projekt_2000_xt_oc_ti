@@ -16,8 +16,8 @@
           <div><button @click="reload">Tabelle neu laden</button></div>
           <umsatz-tabelle :key="table_reload"></umsatz-tabelle>
         </div>
-        <div class="col-7 ">
-          <div class="row">
+        <div class="col-7 " >
+          <div class="row" id = "huups">
             <div class="col-2"><konto-gang></konto-gang></div>
             <div class="col-2"><kontogang-loeschen></kontogang-loeschen></div>
           </div>
@@ -72,7 +72,6 @@ export default {
         store.kontostandId = data
         vorname.value = data.vorname;
         store.userId = data.id;
-        console.log("User ID: "+store.userId)
         for (let i = 0; i < data.kontostandIDs.length; i++) {
           await axios.get(`http://localhost:8080/api/user/zugang/${data.kontostandIDs[i]}`).then(function(response){
             betrag += response.data.amount;
@@ -103,6 +102,7 @@ export default {
     border:2px solid #000000;
     color: #000000;
   }
+
   [class*="table"]{
     padding:1rem;
     background-color: #fff;

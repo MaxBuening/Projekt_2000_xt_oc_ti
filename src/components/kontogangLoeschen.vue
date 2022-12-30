@@ -5,14 +5,12 @@
   </button>
 
 
-  <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+  <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="kgangdelete" aria-hidden="true">
+    <div class="modal-dialog" role="dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Transaktion Löschen</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <div class="form-floating">
@@ -21,7 +19,6 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Schließen</button>
           <button type="button" class="btn btn-primary" @click="deleteTransaktion">Löschen</button>
         </div>
       </div>
@@ -31,6 +28,7 @@
 
 <script>
 import axios from "axios";
+import {store} from "@/assets/store";
 
 export default {
   name: "kontogangLoeschen",
@@ -43,9 +41,14 @@ export default {
 
   methods: {
     deleteTransaktion(){
-      axios.delete(`http://localhost:8080/api/user/zugang/${this.id}`).then(async function (response){
-        console.log(response)
-
+      axios.delete(`http://localhost:8080/api/user/zugang/${this.id}`).then(async function (){
+        const {data} = await axios.get('http://localhost:8080/api/user');
+        store.kontostandId = data
+        for (let i = 0; i < data.kontostandIDs.length; i++) {
+          await axios.get(`http://localhost:8080/api/user/zugang/${data.kontostandIDs[i]}`).then(function(response){
+            store.newAmount += response.data.amount;
+          })
+        }
       })
     }
   }
