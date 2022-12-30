@@ -10,5 +10,6 @@ export const store = reactive({
     table_reload : 0,
     tabelle : Boolean,
     navbar : false,
-    nav : 0
+    nav : 0,
+    login : false
 })

@@ -2,7 +2,9 @@
   <main class="form-signin w-100 m-auto">
     <form @submit.prevent="anfrage">
       <h1 class="h3 mb-3 fw-normal">Bitte Einloggen</h1>
-
+      <div class="alert alert-danger" role="alert" v-if="store.login">
+        !!Passwort oder Nutzername Falsch!!
+      </div>
       <div class="form-floating">
         <input v-model="anfrage.benutzername" type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
         <label for="floatingInput">Benutzername</label>
@@ -22,14 +24,19 @@
 
 import router from "@/router";
 import axios from "axios";
+import {store} from "@/assets/store";
 
 
 
 
 export default {
   name: "Log-in",
+data(){
+ return{
+   store
+ }
+},
   methods: {
-
     anfrage(){
       axios.post('http://localhost:8080/api/login', {
         benutzername: this.anfrage.benutzername,
@@ -39,11 +46,15 @@ export default {
           .then(async function (response) {
             axios.defaults.headers.common['Authorization'] = `Bearer ${response.data}`
             if (response.message !== "Request failed with status code 400"){
+              store.login = false
               await router.push('/user')
+            } else {
+              store.login = true
             }
           })
           .catch(function (error) {
             console.log(error);
+            store.login = true
           });
     }
   }
