@@ -1,5 +1,5 @@
 <template>
-  <body>
+  <body style="background-color: grey" id="bodyHaupt">
     <div class="wrap">
     <div class="container-fluid min-vh-100">
       <div class="row">
@@ -22,8 +22,8 @@
             <div class="col-2"><kontogang-loeschen></kontogang-loeschen></div>
           </div>
           <div class="row">
-            <div class="col">Datum</div>
-            <div class="col">Betrag</div>
+            <div class="col" style="background-color: grey">Datum</div>
+            <div class="col" id="BetragCol">Betrag</div>
             <div class="col">Zugang</div>
             <div class="col">Abgang</div>
           </div>
@@ -60,7 +60,8 @@ export default {
     let betrag = 0;
     const vorname = ref("userKonnteNichtGeladenWerden");
     const date = new Date();
-    const fullDate = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
+    const fullDate = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear()
+    const backgroundColor = "#2c3e50";
 
     onBeforeMount(async () => {
 
@@ -83,6 +84,7 @@ export default {
       vorname,
       fullDate,
       betrag,
+      backgroundColor,
       store
     }
 

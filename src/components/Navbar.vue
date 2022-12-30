@@ -1,22 +1,22 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Projekt2000 XT OC TI</a>
+    <div class="container-fluid bg-dark">
+      <a class="navbar-brand text-white" href="#">Projekt2000 XT OC TI</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 
         <div class="navbar-nav" v-if="auth">
-          <router-link class="nav-link" to="/" >Home</router-link>
-          <router-link class="nav-link" to="/user">Profil</router-link>
-          <router-link class="nav-link" to="/" @click="logout" >Logout</router-link>
+          <router-link class="nav-link text-white" to="/" >Home</router-link>
+          <router-link class="nav-link" to="/user" style="color: aquamarine">Profil</router-link>
+          <router-link class="nav-link text-white" to="/" @click="logout" >Logout</router-link>
         </div>
 
         <div class="navbar-nav" v-if="!auth">
-          <router-link class="nav-link" to="/" >Home</router-link>
-          <router-link class="nav-link" to="/login">Einloggen</router-link>
-          <router-link class="nav-link" to="/register">Registrieren</router-link>
+          <router-link class="nav-link text-white" to="/" >Home</router-link>
+          <router-link class="nav-link" to="/login" style="color: aquamarine">Einloggen</router-link>
+          <router-link class="nav-link text-white" to="/register">Registrieren</router-link>
         </div>
 
       </div>
