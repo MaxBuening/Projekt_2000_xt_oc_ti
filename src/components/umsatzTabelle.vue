@@ -4,6 +4,7 @@
     <thead>
     <tr>
       <th scope="col">#</th>
+      <th scope="col">ID</th>
       <th scope="col">Datum</th>
       <th scope="col">Verwendungszweck</th>
       <th scope="col">Betrag</th>
@@ -27,18 +28,20 @@ export default {
     let betrag2 = [];
     let responseArray = [];
 
-    function addRowToKontogang(Row, Datum, Beschreibung, Betrag){
+    function addRowToKontogang(Row,ID, Datum, Beschreibung, Betrag){
       let tableBody = document.getElementById("tbody1");
 
 
       let newRow = tableBody.insertRow(0);
 
       let number = newRow.insertCell(0)
-      let datum = newRow.insertCell(1);
-      let abgangZugang = newRow.insertCell(2);
-      let betrag1 = newRow.insertCell(3);
+      let id = newRow.insertCell(1)
+      let datum = newRow.insertCell(2);
+      let abgangZugang = newRow.insertCell(3);
+      let betrag1 = newRow.insertCell(4);
 
       number.innerHTML='<b>'+Row+'</b>';
+      id.innerHTML=ID
       datum.innerHTML=Datum;
       abgangZugang.innerHTML=Beschreibung;
       betrag1.innerHTML=Betrag;
@@ -136,7 +139,7 @@ export default {
       if(tableBody.rows.length > 0) tableBody.innerHTML = "";
 
       for (let i = sortedArray.length-1; i>=0; i--){
-        addRowToKontogang(i+1,sortedArray[i].data.datum,sortedArray[i].data.beschriftug,sortedArray[i].data.amount)
+        addRowToKontogang(i+1,sortedArray[i].data.id,sortedArray[i].data.datum,sortedArray[i].data.beschriftug,sortedArray[i].data.amount)
       }
 
     })

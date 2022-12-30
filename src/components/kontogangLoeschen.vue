@@ -1,6 +1,6 @@
 <template>
 
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete">
+  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">
     Kontogang Löschen
   </button>
 
@@ -55,5 +55,8 @@ export default {
 </script>
 
 <style scoped>
+p{
+  background-color: dimgrey;
+}
 
 </style>

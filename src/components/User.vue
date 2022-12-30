@@ -18,8 +18,8 @@
         </div>
         <div class="col-7 ">
           <div class="row">
-          <konto-gang></konto-gang>
-            <kontogang-loeschen></kontogang-loeschen>
+            <div class="col-2"><konto-gang></konto-gang></div>
+            <div class="col-2"><kontogang-loeschen></kontogang-loeschen></div>
           </div>
           <div class="row">
             <div class="col">Datum</div>
