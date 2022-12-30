@@ -1,14 +1,25 @@
 <template>
-  <navbar></navbar>
+  <navbar :key="store.nav"></navbar>
   <router-view/>
 </template>
 
 <script>
 import Navbar from "./components/Navbar";
+import {store} from "@/assets/store";
 
 export default {
   name:"App",
-  components:{ Navbar}
+  components:{ Navbar},
+  data(){
+    return {
+      store
+    }
+  },
+  methods:{
+    reload(){
+      store.nav++
+    }
+  }
 }
 </script>
 

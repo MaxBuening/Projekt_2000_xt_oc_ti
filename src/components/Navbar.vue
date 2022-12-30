@@ -7,13 +7,13 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 
-        <div class="navbar-nav" v-if="auth">
+        <div class="navbar-nav" v-if="store.navbar">
           <router-link class="nav-link text-white" to="/" >Home</router-link>
           <router-link class="nav-link" to="/user" style="color: aquamarine">Profil</router-link>
           <router-link class="nav-link text-white" to="/" @click="logout" >Logout</router-link>
         </div>
 
-        <div class="navbar-nav" v-if="!auth">
+        <div class="navbar-nav" v-if="!store.navbar">
           <router-link class="nav-link text-white" to="/" >Home</router-link>
           <router-link class="nav-link" to="/login" style="color: aquamarine">Einloggen</router-link>
           <router-link class="nav-link text-white" to="/register">Registrieren</router-link>
@@ -40,10 +40,10 @@ export default {
       try{
         const resp = await axios.get('http://localhost:8080/api/user');
         if(resp.message !== "Request failed with status code 401"){
-          auth.value = true;
+          store.navbar = true;
         }
       } catch (e) {
-        auth.value =false;
+        store.navbar =false;
       }
     });
 
@@ -52,6 +52,7 @@ export default {
       await axios.post('http://localhost:8080/api/logout', {}, {withCredentials: true})
           .then(async function (response) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${response.data}`
+            store.navbar = false;
             auth.value= false;
             store.tabelle = false;
             store.table_reload++;
@@ -64,7 +65,8 @@ export default {
     }
     return {
       auth,
-      logout
+      logout,
+      store
     }
 
   }

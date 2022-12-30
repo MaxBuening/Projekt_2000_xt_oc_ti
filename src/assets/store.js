@@ -8,5 +8,7 @@ export const store = reactive({
     success : Boolean,
     newAmount : 0,
     table_reload : 0,
-    tabelle : Boolean
+    tabelle : Boolean,
+    navbar : false,
+    nav : 0
 })

@@ -16,7 +16,7 @@
           <div><button @click="reload">Tabelle neu laden</button></div>
           <umsatz-tabelle :key="store.table_reload" v-if="store.tabelle"></umsatz-tabelle>
         </div>
-        <div class="col-7 " >
+        <div class="col-7 ">
           <div class="row" id = "huups">
             <div class="col-2"><konto-gang></konto-gang></div>
             <div class="col-2"><kontogang-loeschen></kontogang-loeschen></div>
@@ -64,7 +64,7 @@ export default {
     const backgroundColor = "#2c3e50";
 
     onBeforeMount(async () => {
-
+        store.nav++
         const {data} = await axios.get('http://localhost:8080/api/user');
         store.kontostandId = data
         vorname.value = data.vorname;
