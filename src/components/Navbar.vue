@@ -27,6 +27,7 @@
 <script>
 import {onMounted, ref} from "vue";
 import axios from "axios";
+import {store} from "@/assets/store";
 
 
 export default {
@@ -52,6 +53,8 @@ export default {
           .then(async function (response) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${response.data}`
             auth.value= false;
+            store.tabelle = false;
+            store.table_reload++;
             this.forceUpdate();
       })
           .catch(function (error) {

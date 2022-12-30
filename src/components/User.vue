@@ -14,7 +14,7 @@
       <div class="row h-100">
         <div class="col-5 h-50">
           <div><button @click="reload">Tabelle neu laden</button></div>
-          <umsatz-tabelle :key="table_reload"></umsatz-tabelle>
+          <umsatz-tabelle :key="store.table_reload" v-if="store.tabelle"></umsatz-tabelle>
         </div>
         <div class="col-7 " >
           <div class="row" id = "huups">
@@ -48,15 +48,11 @@ export default {
   name: "Us-er",
   components: {KontogangLoeschen, UmsatzTabelle, KontoGang},
 
-  data (){
-    return {
-      table_reload : 0
-    }
-  },
 
   methods: {
     reload(){
-      this.table_reload++
+      store.table_reload++
+      store.tabelle = true
     }
   },
 

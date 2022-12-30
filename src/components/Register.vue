@@ -31,6 +31,7 @@
 import {reactive} from "vue";
 import axios from "axios";
 import {useRouter} from "vue-router/dist/vue-router";
+import {store} from "@/assets/store";
 
 export default {
   name: "Reg-ister",
@@ -46,6 +47,7 @@ export default {
       const submit = async () => {
         console.log(data)
         await axios.post('http://localhost:8080/api/register', data)
+        store.kontostandId = null
         await router.push('/login')
       }
       return {data, submit}

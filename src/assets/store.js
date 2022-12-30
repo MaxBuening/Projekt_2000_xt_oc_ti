@@ -6,5 +6,7 @@ export const store = reactive({
     amount : Number,
     kontostandId : Object,
     success : Boolean,
-    newAmount : 0
+    newAmount : 0,
+    table_reload : 0,
+    tabelle : Boolean
 })
