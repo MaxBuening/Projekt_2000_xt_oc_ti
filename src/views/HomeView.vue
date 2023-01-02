@@ -1,6 +1,6 @@
 <template>
   <div class="home" style="align-content: center">
-    <img src="../assets/Projekt2000GrosseLogo.png" style="width: 1500px; padding-top: 15%">
+    <img src="../assets/Projekt2000GrosseLogo.png" style="width: 1000px; padding-top: 10%">
   </div>
 </template>
 
