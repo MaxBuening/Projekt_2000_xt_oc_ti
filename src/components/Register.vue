@@ -36,7 +36,7 @@
         </div>
       </div>
 
-      <button class="w-100 btn btn-lg btn-primary" style="margin-bottom: 20px" type="submit">Regestrieren</button>
+      <button class="w-100 btn btn-lg btn-secondary" style="margin-bottom: 20px" type="submit">Regestrieren</button>
       <i v-if="passwortzukurz" class="warning">Das Passwort ist zu schwach <br> Es sollte min. 6 Zeichen lang sein und min ein Sonderzeichen enthalten (!,§,$,%,&,/,-) </i>
       <i v-if="benutzerNamebereitsvergeben" class="warning">Der Benutzername ist bereits vergeben</i>
     </form>
@@ -72,10 +72,10 @@ export default {
     const benutzerNamebereitsvergeben = ref(false)
     const router = useRouter();
       const submit = async () => {
-       // console.log(data)
 
 
-        //console.log((data.passwort.includes("-") || data.passwort.includes("!") || data.passwort.includes("§") || data.passwort.includes("$") || data.passwort.includes("%") || data.passwort.includes("&") || data.passwort.includes("/")) && data.passwort.length > 6)
+
+
         if ((data.passwort.includes("-") || data.passwort.includes("!") || data.passwort.includes("§") || data.passwort.includes("$") || data.passwort.includes("%") || data.passwort.includes("&") || data.passwort.includes("/")) && data.passwort.length > 6){
           console.log("!Eistee0815!".length)
           await axios.post('http://localhost:8080/api/register', data).then(async function (response){
@@ -90,14 +90,9 @@ export default {
             }
           })
 
-
-          //benutzerNamebereitsvergeben.value = anfrage.message === "Benutzername existiert bereits";
-
         } else {
           passwortzukurz.value = true;
         }
-
-
 
       }
       return {data, submit, passwortzukurz, benutzerNamebereitsvergeben}

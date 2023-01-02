@@ -155,5 +155,8 @@ export default {
 
 <style scoped>
   .form-check{text-align: left}
+  .btn-success{
+    background-color: seagreen;
+  }
 
 </style>
