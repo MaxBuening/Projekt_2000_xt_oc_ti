@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-light">
     <div class="container-fluid bg-dark">
       <a class="navbar-brand text-white" href="/">Projekt2000 XT OC TI</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,13 +9,13 @@
 
         <div class="navbar-nav" v-if="store.navbar">
           <router-link class="nav-link text-white" to="/" >Home</router-link>
-          <router-link class="nav-link" to="/user" style="color: aquamarine">Profil</router-link>
+          <router-link class="nav-link text-white" to="/user" style="color: aquamarine">Profil</router-link>
           <router-link class="nav-link text-white" to="/" @click="logout" >Logout</router-link>
         </div>
 
         <div class="navbar-nav" v-if="!store.navbar">
           <router-link class="nav-link text-white" to="/" >Home</router-link>
-          <router-link class="nav-link" to="/login" style="color: aquamarine">Einloggen</router-link>
+          <router-link class="nav-link text-white" to="/login" style="color: aquamarine">Einloggen</router-link>
           <router-link class="nav-link text-white" to="/register">Registrieren</router-link>
         </div>
 

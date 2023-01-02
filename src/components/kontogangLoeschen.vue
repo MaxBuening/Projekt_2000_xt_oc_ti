@@ -1,6 +1,6 @@
 <template>
 
-  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">
+  <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#delete" style="font-size: x-large">
     Kontogang Löschen
   </button>
 

@@ -1,7 +1,7 @@
 <template>
  <form @submit.prevent="submit()">
    <!-- Button trigger modal -->
-   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kontogang" @click="click">
+   <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#kontogang" @click="click" style="font-size: x-large;">
      Kontogang hinzufügen
    </button>
 

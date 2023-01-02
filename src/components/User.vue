@@ -1,5 +1,5 @@
 <template>
-  <body style="background-color: grey" id="bodyHaupt">
+  <body style="background-color: darkslategray" id="bodyHaupt">
     <div class="wrap">
     <div class="container-fluid min-vh-100">
       <div class="row">
@@ -9,24 +9,27 @@
         <div class="col-6"></div>
       </div>
       <div class="row">
-        <div id="AAA" class="col"><h2 class = "row text-left text">Account von {{vorname}}, Kontostand am {{fullDate}}: {{ store.newAmount || store.amount }}€</h2></div>
+        <div id="AAA" class="col"><h2 class = "row text-left text" style="color: darkslategray">Account von {{vorname}}</h2></div>
       </div>
       <div class="row h-100">
         <div class="col-5 h-50">
-          <div><button @click="reload">Tabelle neu laden</button></div>
+          <div><button @click="reload"><i class="bi bi-arrow-clockwise"></i></button></div>
           <umsatz-tabelle :key="store.table_reload" v-if="store.tabelle"></umsatz-tabelle>
         </div>
         <div class="col-7 ">
           <div class="row" id = "huups">
-            <div class="col-2"><konto-gang></konto-gang></div>
-            <div class="col-2"><kontogang-loeschen></kontogang-loeschen></div>
+            <div class="col-6"><konto-gang></konto-gang></div>
+            <div class="col-6"><kontogang-loeschen></kontogang-loeschen></div>
           </div>
-          <div class="row">
-            <div class="col" style="background-color: grey">Datum</div>
-            <div class="col" id="BetragCol">Betrag</div>
-            <div class="col">Zugang</div>
-            <div class="col">Abgang</div>
+          <div class="row" id="Betrag1" v-if="(store.newAmount || store.amount)>=0">
+            <div class="col-6" style="border: 10px solid transparent; text-align: left; color: darkslategray"><h2>Kontostand: {{ store.newAmount || store.amount }}€</h2></div>
+            <div class="col-6" style="border: 10px solid transparent; text-align: right; color: darkslategray"><h2>{{fullDate}}</h2></div>
           </div>
+          <div class="row" id="Betrag2" v-if="(store.newAmount || store.amount)<0">
+            <div class="col-6" style="border: 10px solid transparent; text-align: left; color: crimson"><h2>Kontostand: {{ store.newAmount || store.amount }}€</h2></div>
+            <div class="col-6" style="border: 10px solid transparent; text-align: right; color: darkslategray"><h2>{{fullDate}}</h2></div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -60,7 +63,7 @@ export default {
     let betrag = 0;
     const vorname = ref("userKonnteNichtGeladenWerden");
     const date = new Date();
-    const fullDate = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear()
+    const fullDate = date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear()
     const backgroundColor = "#2c3e50";
 
     onBeforeMount(async () => {
@@ -96,16 +99,22 @@ export default {
 <style scoped>
   [class*="col"]{
     padding:1rem;
-    background-color: #fff;
+    background-color: azure;
     border:2px solid #000000;
     color: #000000;
   }
 
   [class*="table"]{
     padding:1rem;
-    background-color: #fff;
+    background-color: azure;
     border:2px solid #000000;
     color: #000000;
+  }
+  [class*="row"]{
+    border: 10px solid transparent;
+
+  }
+  [class*="col"]{
   }
 
 </style>
