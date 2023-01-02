@@ -2,18 +2,16 @@
   <body style="background-color: darkslategray" id="bodyHaupt">
     <div class="wrap">
     <div class="container-fluid min-vh-100">
+
       <div class="row">
-        <div class="col-3">
-          <img alt="Logo" src="../assets/P2000XTocTI-Logo.png" style="width:300px">
+        <div id="AAA" class="col-6" style="border: 2px solid transparent"><h2 class = "row text-left text" style="color: darkslategray">Account von {{vorname}}</h2></div>
+        <div class="col-6" style="border: 2px solid transparent">
+          <img src="../assets/P2000XTocTI-Logo.png" style="width: 300px" align="right">
         </div>
-        <div class="col-6"></div>
-      </div>
-      <div class="row">
-        <div id="AAA" class="col"><h2 class = "row text-left text" style="color: darkslategray">Account von {{vorname}}</h2></div>
       </div>
       <div class="row h-100">
         <div class="col-5 h-50">
-          <div><button @click="reload"><i class="bi bi-arrow-clockwise"></i></button></div>
+          <div><button @click="reload" style="background-color: transparent; border: 10px solid transparent"><img src="../assets/Reload.png" style="width: 50px"></button></div>
           <umsatz-tabelle :key="store.table_reload" v-if="store.tabelle"></umsatz-tabelle>
         </div>
         <div class="col-7 ">
@@ -22,12 +20,37 @@
             <div class="col-6"><kontogang-loeschen></kontogang-loeschen></div>
           </div>
           <div class="row" id="Betrag1" v-if="(store.newAmount || store.amount)>=0">
-            <div class="col-6" style="border: 10px solid transparent; text-align: left; color: darkslategray"><h2>Kontostand: {{ store.newAmount || store.amount }}€</h2></div>
+            <div class="col-6" style="border: 10px solid transparent; text-align: left; color: darkslategray; font-size: 30px"><b>Kontostand: {{ store.newAmount || store.amount }}€</b></div>
             <div class="col-6" style="border: 10px solid transparent; text-align: right; color: darkslategray"><h2>{{fullDate}}</h2></div>
           </div>
           <div class="row" id="Betrag2" v-if="(store.newAmount || store.amount)<0">
-            <div class="col-6" style="border: 10px solid transparent; text-align: left; color: crimson"><h2>Kontostand: {{ store.newAmount || store.amount }}€</h2></div>
+            <div class="col-6" style="border: 10px solid transparent; text-align: left; color: crimson; font-size: 30px"><h2>Kontostand: {{ store.newAmount || store.amount }}€</h2></div>
             <div class="col-6" style="border: 10px solid transparent; text-align: right; color: darkslategray"><h2>{{fullDate}}</h2></div>
+          </div>
+
+          <div class="row" style="text-align: left; margin-bottom: 0px">
+            <div class="col-4" style="padding-bottom: 0; padding-top: 0; border: 0px">
+              <h2 style="font-size: 20px; color: darkslategray">Höchste Einnahme:</h2>
+            </div>
+            <div class="col-8" style="padding-bottom: 0; padding-top: 0; border: 0px">
+              <h2 style="font-size: 20px; color: darkslategray">{{store.hoechstEinnahme}}</h2>
+            </div>
+          </div>
+          <div class="row" style="text-align: left; margin-bottom: 0px">
+            <div class="col-4" style="padding-bottom: 0; padding-top: 0; border: 0px">
+              <h2 style="font-size: 20px; color: darkslategray">Höchste Ausgabe</h2>
+            </div>
+            <div class="col-8" style="padding-bottom: 0; padding-top: 0; border: 0px">
+              <h2 style="font-size: 20px; color: darkslategray">{{store.hoechstAusgabe}}</h2>
+            </div>
+          </div>
+          <div class="row" style="text-align: left; margin-bottom: 0px">
+            <div class="col-4" style="padding-bottom: 0; padding-top: 0; border: 0px">
+              <h2 style="font-size: 20px; color: darkslategray">Transaktionsdurchschnitt:</h2>
+            </div>
+            <div class="col-8" style="padding-bottom: 0; padding-top: 0; border: 0px">
+              <h2 style="font-size: 20px; color: darkslategray">{{store.transaktionsdurchschnitt}}</h2>
+            </div>
           </div>
 
         </div>

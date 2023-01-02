@@ -28,6 +28,28 @@ export default {
     let betrag2 = [];
     let responseArray = [];
 
+    function dreiWerteBerechnen(){
+      let max1 = 0;
+      let min1 = 0;
+      let durchschnitt = 0;
+      console.log("response length: "+responseArray.length)
+      console.log(responseArray[1])
+      for (let i = 0; i<responseArray.length; i++){
+        if (responseArray[i].data.amount > max1){
+          max1 = responseArray[i].data.amount
+        }
+        if (responseArray[i].data.amount < min1){
+          min1 = responseArray[i].data.amount
+        }
+        durchschnitt += responseArray[i].data.amount;
+      }
+      durchschnitt = (durchschnitt/responseArray.length).toFixed(2)
+      console.log(max1)
+      store.hoechstEinnahme = max1;
+      store.hoechstAusgabe = min1;
+      store.transaktionsdurchschnitt = durchschnitt;
+    }
+
     function addRowToKontogang(Row,ID, Datum, Beschreibung, Betrag){
       let tableBody = document.getElementById("tbody1");
       let newRow = tableBody.insertRow(0);
@@ -135,6 +157,8 @@ export default {
       }
       correctFormatArray = correctDateFormat(responseArray)
       sortedArray = sortDate(correctFormatArray)
+
+      dreiWerteBerechnen()
 
       let tableBody = document.getElementById("tbody1");
       if(tableBody.rows.length > 0) tableBody.innerHTML = "";
