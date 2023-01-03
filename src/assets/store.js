@@ -14,5 +14,6 @@ export const store = reactive({
     login : false,
     hoechstAusgabe : 0,
     hoechstEinnahme : 0,
-    transaktionsdurchschnitt : 0
+    transaktionsdurchschnitt : 0,
+    gibts : true
 })

@@ -77,11 +77,9 @@ export default {
 
 
         if ((data.passwort.includes("-") || data.passwort.includes("!") || data.passwort.includes("§") || data.passwort.includes("$") || data.passwort.includes("%") || data.passwort.includes("&") || data.passwort.includes("/")) && data.passwort.length > 6){
-          console.log("!Eistee0815!".length)
           await axios.post('http://localhost:8080/api/register', data).then(async function (response){
             passwortzukurz.value = false;
             store.kontostandId = null;
-           console.log(response.request.status)
             if (!(response.request.status === 400)){
               benutzerNamebereitsvergeben.value = false
               await router.push('/login')

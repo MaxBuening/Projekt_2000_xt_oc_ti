@@ -33,7 +33,7 @@
               <h2 style="font-size: 20px; color: darkslategray">Höchste Einnahme:</h2>
             </div>
             <div class="col-8" style="padding-bottom: 0; padding-top: 0; border: 0px">
-              <h2 style="font-size: 20px; color: darkslategray">{{store.hoechstEinnahme}}</h2>
+              <h2 style="font-size: 20px; color: darkslategray">{{store.hoechstEinnahme}}€</h2>
             </div>
           </div>
           <div class="row" style="text-align: left; margin-bottom: 0px">
@@ -41,7 +41,7 @@
               <h2 style="font-size: 20px; color: darkslategray">Höchste Ausgabe</h2>
             </div>
             <div class="col-8" style="padding-bottom: 0; padding-top: 0; border: 0px">
-              <h2 style="font-size: 20px; color: darkslategray">{{store.hoechstAusgabe}}</h2>
+              <h2 style="font-size: 20px; color: darkslategray">{{store.hoechstAusgabe}}€</h2>
             </div>
           </div>
           <div class="row" style="text-align: left; margin-bottom: 0px">
@@ -49,7 +49,7 @@
               <h2 style="font-size: 20px; color: darkslategray">Transaktionsdurchschnitt:</h2>
             </div>
             <div class="col-8" style="padding-bottom: 0; padding-top: 0; border: 0px">
-              <h2 style="font-size: 20px; color: darkslategray">{{store.transaktionsdurchschnitt}}</h2>
+              <h2 style="font-size: 20px; color: darkslategray">{{store.transaktionsdurchschnitt}}€</h2>
             </div>
           </div>
 

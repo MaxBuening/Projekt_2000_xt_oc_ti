@@ -110,10 +110,8 @@ export default {
          let realamount = kontodaten.amount
 
         if(document.getElementById("flexRadioDefault2").checked){
-          console.log()
           if (!(realamount < 0)){
             realamount = kontodaten.amount * -1
-            console.log(realamount)
           }
         } else {
           if (realamount < 0){
@@ -127,7 +125,7 @@ export default {
           datum: kontodaten.datum
         })
 
-        console.log("Result: "+kontodaten.datum)
+
         store.success = true
         const {data} = await axios.get('http://localhost:8080/api/user');
         store.kontostandId = data
@@ -139,7 +137,6 @@ export default {
           })
 
         }
-        console.log(store.newAmount)
       }
     }
     return{

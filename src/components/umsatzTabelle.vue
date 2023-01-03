@@ -32,8 +32,6 @@ export default {
       let max1 = 0;
       let min1 = 0;
       let durchschnitt = 0;
-      console.log("response length: "+responseArray.length)
-      console.log(responseArray[1])
       for (let i = 0; i<responseArray.length; i++){
         if (responseArray[i].data.amount > max1){
           max1 = responseArray[i].data.amount
@@ -44,7 +42,6 @@ export default {
         durchschnitt += responseArray[i].data.amount;
       }
       durchschnitt = (durchschnitt/responseArray.length).toFixed(2)
-      console.log(max1)
       store.hoechstEinnahme = max1;
       store.hoechstAusgabe = min1;
       store.transaktionsdurchschnitt = durchschnitt;
@@ -77,20 +74,20 @@ export default {
       let dateToBeEdited = []
       for (let i = 0; i<kontogangArray.length; i++){
         dateToBeEdited = kontogangArray[i].data.datum;
-        //console.log(dateToBeEdited[1].toString().length)
+
 
         //Convert year to string
         dateToBeEdited[0]=dateToBeEdited[0].toString();
 
         //Check if month is less than 10
         if (dateToBeEdited[1]<10){
-          //console.log("Yes: "+dateToBeEdited[1]);
+
           dateToBeEdited[1]="0"+dateToBeEdited[1]
         }
 
         //Check if day is less than 10
         if(dateToBeEdited[2]<10){
-          //console.log("Yes: "+dateToBeEdited[2])
+
           dateToBeEdited[2]="0"+dateToBeEdited[2]
         }
         kontogangArray[i].data.datum = dateToBeEdited
@@ -143,16 +140,12 @@ export default {
       let data = store.kontostandId
       let correctFormatArray = []
       let sortedArray = []
-      //let datum = new Date();
-      //let day = "";
+
 
       for (let i = 0; i < data.kontostandIDs.length; i++) {
         await axios.get(`http://localhost:8080/api/user/zugang/${data.kontostandIDs[i]}`).then(function(response){
           betrag2.push(response.data.beschriftug)
           responseArray.push(response)
-          //datum = response.data.datum;
-          //day = datum;
-          //addRowToKontogang(i+1,response.data.datum,response.data.beschriftug,response.data.amount)
         })
       }
       correctFormatArray = correctDateFormat(responseArray)

@@ -27,7 +27,6 @@ export default {
           auth.value = true;
         }
       } catch (e) {
-        console.log(auth)
         auth.value =false;
       }
     });
