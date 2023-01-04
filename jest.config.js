@@ -3,6 +3,10 @@ module.exports = {
   transform: {
     "^.+\\.vue$": "@vue/vue3-jest",
   },
+  moduleNameMapper:{
+    "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styleMock.js",
+    "\\.(gif|ttf|eot|svg|png)$": "<rootDir>/__mocks__/fileMock.js"
+  },
   automock: false,
   resetMocks: false,
   setupFiles: [
