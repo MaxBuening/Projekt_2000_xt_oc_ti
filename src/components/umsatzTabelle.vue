@@ -42,6 +42,7 @@ export default {
         durchschnitt += responseArray[i].data.amount;
       }
       durchschnitt = (durchschnitt/responseArray.length).toFixed(2)
+      if(isNaN(durchschnitt)) durchschnitt = 0
       store.hoechstEinnahme = max1;
       store.hoechstAusgabe = min1;
       store.transaktionsdurchschnitt = durchschnitt;

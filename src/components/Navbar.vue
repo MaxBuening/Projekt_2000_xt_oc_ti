@@ -55,6 +55,12 @@ export default {
             store.navbar = false;
             auth.value= false;
             store.tabelle = false;
+            store.kontostandId = null
+            store.hoechstAusgabe = 0
+            store.hoechstEinnahme = 0
+            store.transaktionsdurchschnitt = 0
+            store.newAmount = 0
+            store.amount = 0
             store.table_reload++;
       })
           .catch(function (error) {

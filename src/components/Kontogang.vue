@@ -61,11 +61,11 @@
 <script>
 
 import Datepicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css'
+import '@vuepic/vue-datepicker/dist/main.css';
 import axios from "axios";
 import {store} from "@/assets/store";
 import {reactive} from "vue";
-import '@vuepic/vue-datepicker/dist/main.css';
+
 
 export default {
   name: "Konto-gang",
@@ -101,7 +101,7 @@ export default {
 
     const submit = async () => {
 
-      if (kontodaten.amount === 0 || kontodaten.datum === '' || kontodaten.beschriftug === '' || kontodaten.amount === null || kontodaten.amount === ""){
+      if (kontodaten.amount === 0 || kontodaten.datum === '' || kontodaten.beschriftug === '' || kontodaten.amount === null || kontodaten.amount === "" || kontodaten.datum === null){
         store.auth = false
         store.success = false
       } else {

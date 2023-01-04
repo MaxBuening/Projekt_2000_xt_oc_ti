@@ -1,15 +1,13 @@
 <template>
 <div>
-  <!--<h3>{{ message }}</h3>  v-if= -->
-  <!--<user></user>-->
   <div v-if="auth"><h3><user></user></h3></div>
   <div v-if="!auth"><h3>Not logged in</h3></div>
 </div>
 </template>
 
 <script>
-import {onMounted, ref} from "vue";
 import axios from "axios";
+import {onMounted, ref} from "vue";
 import User from "@/components/User";
 
 

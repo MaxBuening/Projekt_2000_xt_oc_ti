@@ -76,7 +76,7 @@ export default {
 
 
 
-        if ((data.passwort.includes("-") || data.passwort.includes("!") || data.passwort.includes("§") || data.passwort.includes("$") || data.passwort.includes("%") || data.passwort.includes("&") || data.passwort.includes("/")) && data.passwort.length > 6){
+        if ((data.passwort.includes("-") || data.passwort.includes("!") || data.passwort.includes("§") || data.passwort.includes("$") || data.passwort.includes("%") || data.passwort.includes("&") || data.passwort.includes("/")) && data.passwort.length > 5){
           await axios.post('http://localhost:8080/api/register', data).then(async function (response){
             passwortzukurz.value = false;
             store.kontostandId = null;
