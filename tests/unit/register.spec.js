@@ -9,6 +9,10 @@ import axios from "axios";
 jest.mock('axios')
 describe("Testing register.vue", () =>{
 
+    afterEach(() => {
+        jest.clearAllMocks()
+    })
+
     it('should find the register button ', function () {
         const wrapper = shallowMount(register)
         expect(wrapper.find('#RegisterButton').text()).toBe('Regestrieren')
@@ -29,7 +33,7 @@ describe("Testing register.vue", () =>{
         axios.post.mockResolvedValueOnce(axiosResponse)
 
         //when
-       await wrapper.find('button').trigger('submit')
+        await wrapper.find('button').trigger('submit')
 
         //than
         expect(axios.post).toHaveBeenCalled()
@@ -37,7 +41,6 @@ describe("Testing register.vue", () =>{
         expect(wrapper.find('#BenutzerNameBereitsVergeben').exists()).toBe(true)
 
     });
-
 
     it('should show the Passwort zu schwach alert when a passwort doesn´t have a special charakter', async () => {
         //given
@@ -55,6 +58,10 @@ describe("Testing register.vue", () =>{
         expect(axios.post).not.toHaveBeenCalled()
 
     });
+
+
+
+
 
 
 })
