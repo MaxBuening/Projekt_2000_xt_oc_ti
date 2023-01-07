@@ -7,13 +7,13 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 
-        <div class="navbar-nav" v-if="store.navbar">
+        <div class="navbar-nav" v-if="store.navbar" id="NavbarLoggedIn">
           <router-link class="nav-link text-white" to="/" >Home</router-link>
           <router-link class="nav-link text-white" to="/user" style="color: aquamarine">Profil</router-link>
-          <router-link class="nav-link text-white" to="/" @click="logout" >Logout</router-link>
+          <router-link class="nav-link text-white" to="/" @click="logout" id="LogoutLink" >Logout</router-link>
         </div>
 
-        <div class="navbar-nav" v-if="!store.navbar">
+        <div class="navbar-nav" v-if="!store.navbar" id="NavbarLoggedOut">
           <router-link class="nav-link text-white" to="/" >Home</router-link>
           <router-link class="nav-link text-white" to="/login" style="color: aquamarine">Einloggen</router-link>
           <router-link class="nav-link text-white" to="/register">Registrieren</router-link>

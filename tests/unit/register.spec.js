@@ -3,10 +3,8 @@ import {shallowMount} from "@vue/test-utils";
 import register from "@/components/Register";
 import axios from "axios";
 
-
-
-
 jest.mock('axios')
+
 describe("Testing register.vue", () =>{
 
     afterEach(() => {
@@ -35,10 +33,11 @@ describe("Testing register.vue", () =>{
         //when
         await wrapper.find('button').trigger('submit')
 
-        //than
+        //then
         expect(axios.post).toHaveBeenCalled()
         expect(axios.post).toHaveBeenCalledWith('http://localhost:8080/api/register', {"benutzername": "", "nachname": "", "passwort": "!!Test!!", "vorname": ""})
         expect(wrapper.find('#BenutzerNameBereitsVergeben').exists()).toBe(true)
+
 
     });
 
@@ -53,15 +52,11 @@ describe("Testing register.vue", () =>{
         //when
         await wrapper.find('button').trigger('submit')
 
-        //than
+        //then
         expect(wrapper.find('#PasswortZuSchwach').exists()).toBe(true)
         expect(axios.post).not.toHaveBeenCalled()
 
     });
-
-
-
-
 
 
 })

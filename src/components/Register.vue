@@ -48,8 +48,8 @@
 
 import {reactive, ref} from "vue";
 import axios from "axios";
-import router from "@/router"
 import {store} from "@/assets/store";
+import router from "@/router";
 
 
 export default {
@@ -72,7 +72,7 @@ export default {
     const benutzerNamebereitsvergeben = ref(false)
 
     const submit = async () => {
-        if ((data.passwort.includes("-") || data.passwort.includes("!") || data.passwort.includes("§") || data.passwort.includes("$") || data.passwort.includes("%") || data.passwort.includes("&") || data.passwort.includes("/")) && data.passwort.length > 5){
+        if ((data.passwort.includes("-") || data.passwort.includes("!") || data.passwort.includes("§") || data.passwort.includes("$") || data.passwort.includes("%") || data.passwort.includes("&") || data.passwort.includes("/")) && (data.passwort.length > 5)){
           await axios.post('http://localhost:8080/api/register', data).then(async function (response){
             passwortzukurz.value = false;
             store.kontostandId = null;
