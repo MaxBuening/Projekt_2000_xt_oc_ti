@@ -31,14 +31,14 @@
       </div>
       <div v-if="!passwortzukurz">
         <div class="form-floating">
-          <input v-model="data.passwort" class="form-control" placeholder="Passwort" type="password">
+          <input v-model="data.passwort" class="form-control" placeholder="Passwort" type="password" id="passwortInput">
           <label>Passwort</label>
         </div>
       </div>
 
-      <button class="w-100 btn btn-lg btn-secondary" style="margin-bottom: 20px" type="submit">Regestrieren</button>
-      <i v-if="passwortzukurz" class="warning">Das Passwort ist zu schwach <br> Es sollte min. 6 Zeichen lang sein und min ein Sonderzeichen enthalten (!,§,$,%,&,/,-) </i>
-      <i v-if="benutzerNamebereitsvergeben" class="warning">Der Benutzername ist bereits vergeben</i>
+      <button class="w-100 btn btn-lg btn-secondary" style="margin-bottom: 20px" type="submit" id="RegisterButton">Regestrieren</button>
+      <i v-if="passwortzukurz" class="warning" id="PasswortZuSchwach">Das Passwort ist zu schwach <br> Es sollte min. 6 Zeichen lang sein und min ein Sonderzeichen enthalten (!,§,$,%,&,/,-) </i>
+      <i v-if="benutzerNamebereitsvergeben" class="warning" id="BenutzerNameBereitsVergeben">Der Benutzername ist bereits vergeben</i>
     </form>
   </main>
 </template>
@@ -48,7 +48,7 @@
 
 import {reactive, ref} from "vue";
 import axios from "axios";
-import {useRouter} from "vue-router/dist/vue-router";
+import router from "@/router"
 import {store} from "@/assets/store";
 
 
@@ -70,12 +70,8 @@ export default {
 
     const passwortzukurz = ref(false)
     const benutzerNamebereitsvergeben = ref(false)
-    const router = useRouter();
-      const submit = async () => {
 
-
-
-
+    const submit = async () => {
         if ((data.passwort.includes("-") || data.passwort.includes("!") || data.passwort.includes("§") || data.passwort.includes("$") || data.passwort.includes("%") || data.passwort.includes("&") || data.passwort.includes("/")) && data.passwort.length > 5){
           await axios.post('http://localhost:8080/api/register', data).then(async function (response){
             passwortzukurz.value = false;
@@ -92,8 +88,14 @@ export default {
           passwortzukurz.value = true;
         }
 
-      }
-      return {data, submit, passwortzukurz, benutzerNamebereitsvergeben}
+    }
+
+      return {
+        data,
+        submit,
+        passwortzukurz,
+        benutzerNamebereitsvergeben
+    }
 
   }
 }
