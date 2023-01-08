@@ -22,8 +22,8 @@ describe('Test NavBar.vue', () => {
 
         axios.post.mockResolvedValueOnce(axiosResponse)
 
-        expect(wrapper.find('#NavbarLoggedOut').exists()).toBeTruthy
-        expect(wrapper.find('#NavbarLoggedIn').exists()).toBeFalsy
+        expect(wrapper.find('#NavbarLoggedOut').exists()).toBeTruthy()
+        expect(wrapper.find('#NavbarLoggedIn').exists()).toBeFalsy()
     });
 
     it('should show the Navbar with logout and profil button when logged in', () => {

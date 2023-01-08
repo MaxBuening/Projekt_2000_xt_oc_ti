@@ -13,7 +13,7 @@ describe("Testing register.vue", () =>{
 
     it('should find the register button ', function () {
         const wrapper = shallowMount(register)
-        expect(wrapper.find('#RegisterButton').text()).toBe('Regestrieren')
+        expect(wrapper.find('#RegisterButton').text()).toBe('Registrieren')
     });
 
     it('should show the Benutzer bereits vergeben alert when the username is already in use', async () => {
