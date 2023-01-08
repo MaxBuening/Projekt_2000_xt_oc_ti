@@ -3,7 +3,7 @@
     <form @submit.prevent="anfrage">
       <h1 class="h3 mb-3 fw-normal">Bitte Einloggen</h1>
       <div class="alert alert-danger" role="alert" v-if="store.login">
-        !!Passwort oder Nutzername Falsch!!
+        Passwort oder Nutzername Falsch
       </div>
       <div class="form-floating">
         <input v-model="anfrage.benutzername" type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
@@ -53,7 +53,7 @@ data(){
             }
           })
           .catch(function (error) {
-            console.log(error);
+            console.log(error)
             store.login = true
           });
     }

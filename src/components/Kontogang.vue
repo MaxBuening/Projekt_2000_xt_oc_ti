@@ -106,7 +106,6 @@ export default {
         store.success = false
       } else {
         store.auth = true
-        console.log(document.getElementById("flexRadioDefault2").checked)
          let realamount = kontodaten.amount
 
         if(document.getElementById("flexRadioDefault2").checked){

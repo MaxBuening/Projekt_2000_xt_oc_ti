@@ -11,9 +11,10 @@ import {onMounted, ref} from "vue";
 import User from "@/components/User";
 
 
+
 export default {
   name: "UserView",
-  components: { User },
+  components: {User },
 
   setup() {
     const auth = ref(false);

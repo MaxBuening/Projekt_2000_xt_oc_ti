@@ -69,6 +69,7 @@ import UmsatzTabelle from "@/components/umsatzTabelle";
 import KontogangLoeschen from "@/components/kontogangLoeschen";
 
 
+
 export default {
 
   name: "Us-er",
@@ -102,9 +103,7 @@ export default {
           })
         }
         store.amount = betrag
-        console.log(store.kontostandId)
-        console.log("Betrag: "+ betrag)
-      })
+    })
 
     return{
       vorname,
