@@ -36,7 +36,7 @@
         </div>
       </div>
 
-      <button class="w-100 btn btn-lg btn-secondary" style="margin-bottom: 20px" type="submit" id="RegisterButton">Regestrieren</button>
+      <button class="w-100 btn btn-lg btn-secondary" style="margin-bottom: 20px" type="submit" id="RegisterButton">Registrieren</button>
       <i v-if="passwortzukurz" class="warning" id="PasswortZuSchwach">Das Passwort ist zu schwach <br> Es sollte min. 6 Zeichen lang sein und min ein Sonderzeichen enthalten (!,§,$,%,&,/,-) </i>
       <i v-if="benutzerNamebereitsvergeben" class="warning" id="BenutzerNameBereitsVergeben">Der Benutzername ist bereits vergeben</i>
     </form>
